@@ -19,6 +19,17 @@
   <meta name="twitter:image" content="https://tusitio.com/imagen-del-curso.jpg" />
   <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
+  <script>
+  document.addEventListener("contextmenu", e => e.preventDefault());
+  document.addEventListener("keydown", e => {
+    if (e.ctrlKey && (e.key === "u" || e.key === "s" || e.key === "c")) {
+      e.preventDefault();
+    }
+    if (e.key === "F12") {
+      e.preventDefault();
+    }
+  });
+  </script>
 </head>
 <body>
 <div class="countdown-wrapper">
