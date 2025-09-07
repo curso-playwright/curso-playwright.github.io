@@ -24,23 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
   updateCountdown();
 });
 
-// 🔔 Alertas flotantes cada 10 segundos
-const alerta = document.getElementById("alerta");
-const nombres = ["Juan", "María", "Carlos", "Lucía", "Pedro", "Ana", "Diego", "Sofía"];
-const paises = ["Perú", "México", "Argentina", "Chile", "Colombia", "España", "Ecuador", "Uruguay"];
-const cursos = ["JavaScript", "Playwright", "Cucumber", "TypeScript", "Automatización QA"];
-
-function mostrarAlerta() {
-  const nombre = nombres[Math.floor(Math.random() * nombres.length)];
-  const pais = paises[Math.floor(Math.random() * paises.length)];
-  const curso = cursos[Math.floor(Math.random() * cursos.length)];
-  alerta.textContent = `${nombre}, de ${pais}, acaba de comprar el curso con ${curso}`;
-  alerta.style.opacity = 1;
-  setTimeout(() => { alerta.style.opacity = 0; }, 5000);
-}
-setInterval(mostrarAlerta, 10000);
-
-
 document.querySelectorAll(".faq-question").forEach(button => {
   button.addEventListener("click", () => {
     const answer = button.nextElementSibling;
@@ -58,5 +41,3 @@ document.querySelectorAll(".faq-question").forEach(button => {
     }
   });
 });
-
-
