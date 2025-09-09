@@ -17,14 +17,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("hours").textContent = hours;
     document.getElementById("minutes").textContent = minutes;
     document.getElementById("seconds").textContent = seconds;
-
     setTimeout(updateCountdown, 1000);
   }
 
   updateCountdown();
 });
 
-document.querySelectorAll(".faq-question").forEach(button => {
+  document.querySelectorAll(".faq-question").forEach(button => {
   button.addEventListener("click", () => {
     const answer = button.nextElementSibling;
     const symbol = button.querySelector(".symbol");
@@ -41,3 +40,4 @@ document.querySelectorAll(".faq-question").forEach(button => {
     }
   });
 });
+

@@ -80,10 +80,11 @@ Desde cero, paso a paso, y con resultados reales que te harán destacar en cualq
     <p style="text-align: justify;">Última actualización:  <strong>10/10/2025</strong></p>
     <p style="text-align: justify;">Idioma: <strong>ESPAÑOL</strong></p>
   </div>
-</section>
-<div class="boton-wrapper">
+  <div class="boton-wrapper">
   <a href="#comprar" class="boton-comprar">Comprar ahora</a>
 </div>
+</section>
+
 <section class="aprendizaje">
   <h2>¿Qué aprenderás ?</h2>
   <ul class="lista-aprendizaje">
@@ -397,7 +398,7 @@ document.getElementById("closeModal").addEventListener("click", function() {
 </section>
 
 <section>
-    <h2>Información del docente</h2>
+    <h2>Información del <strong>INSTRUCTOR</strong></h2>
 </section>
 <section class="docente-info" style="margin-top: -20px;">
   <div class="docente-foto">
@@ -445,13 +446,49 @@ document.getElementById("closeModal").addEventListener("click", function() {
   </div>
 </section>
 
-<section>
+<section class="testimonios">
   <h2>Testimonios de alumnos</h2>
-  <div class="grid-4">
-    <div class="card"><img src="alumno1.jpg" alt=""><p>Juan - “Me ayudó a conseguir trabajo en QA”</p></div>
-    <!-- Repite para 4 alumnos -->
+  <div class="slider-container">
+    <div class="slider-track">
+      <div class="slide">
+        <img src="alumno1.jpg" alt="Juan">
+        <p><strong>Juan</strong> — “Me ayudó a conseguir trabajo en QA”</p>
+      </div>
+      <div class="slide">
+        <img src="alumno2.jpg" alt="María">
+        <p><strong>María</strong> — “Ahora entiendo cómo automatizar desde cero”</p>
+      </div>
+      <div class="slide">
+        <img src="alumno3.jpg" alt="Carlos">
+        <p><strong>Carlos</strong> — “El curso me dio estructura y confianza”</p>
+      </div>
+      <!-- Repite hasta 10 testimonios -->
+    </div>
+    <button class="prev">←</button>
+    <button class="next">→</button>
   </div>
 </section>
+<script>
+  const track = document.querySelector('.slider-track');
+  const slides = document.querySelectorAll('.slide');
+  const prevBtn = document.querySelector('.prev');
+  const nextBtn = document.querySelector('.next');
+  let index = 0;
+
+  function updateSlider() {
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    index = (index > 0) ? index - 1 : slides.length - 1;
+    updateSlider();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    index = (index < slides.length - 1) ? index + 1 : 0;
+    updateSlider();
+  });
+</script>
 
 <section>
   <h2>🎁 Bonos Exclusivos del Curso</h2>
