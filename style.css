@@ -990,6 +990,36 @@ button.next {
   }
 }
 
+.metodos-pago {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.metodos-pago p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.iconos-pago {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.iconos-pago img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.iconos-pago img:hover {
+  transform: scale(1.05);
+}
+
+
 
 
 
