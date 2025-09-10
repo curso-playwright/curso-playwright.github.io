@@ -349,6 +349,7 @@ footer p{
 
 .modulo-titulo .texto {
   flex: 1;
+  font-family: "Poppins", Arial, sans-serif;
 }
 
 .modulo-lecciones {
