@@ -238,26 +238,26 @@ footer p{
 }
 
 #proof-message {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    background: linear-gradient(135deg, #ffffff 0%, #f4f4f4 100%);
-    color: #333;
-    font-family: 'Fredoka', sans-serif;
-    font-size: 17px;
-    font-weight: 500;
-    padding: 16px 22px;
-    border-radius: 12px;
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-    border: 1px solid #ddd;
-    z-index: 9999;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+  position: fixed;
+  bottom: 70px; /* <-- súbelo más arriba, prueba con 60px, 80px o lo que necesites */
+  left: 10px;
+  background: linear-gradient(135deg, #ffffff 0%, #f4f4f4 100%);
+  color: #333;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 16px 22px;
+  border-radius: 12px;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ddd;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
   #proof-message.show {
     opacity: 1;
@@ -349,7 +349,8 @@ footer p{
 
 .modulo-titulo .texto {
   flex: 1;
-  font-family: "Poppins", Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
 }
 
 .modulo-lecciones {
