@@ -1055,6 +1055,35 @@ button.next {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
+.contador-visitas {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem 1.5rem;
+  background-color: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.1rem;
+  color: #444;
+  height: 12px;
+}
+
+.contador-icono {
+  font-size: 1.6rem;
+  color: #ff6f00;
+}
+
+#contador-numero {
+  font-weight: bold;
+  color: #d84315;
+}
+
+
 
 
 

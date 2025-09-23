@@ -41,3 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+  function actualizarContador() {
+    const numero = Math.floor(Math.random() * (90 - 42 + 1)) + 42;
+    document.getElementById('contador-numero').textContent = numero;
+  }
+  setInterval(actualizarContador, 5000);
+  actualizarContador(); // inicial
+
+
