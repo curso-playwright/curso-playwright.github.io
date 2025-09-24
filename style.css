@@ -21,7 +21,8 @@
   gap: 1rem;
   flex-wrap: wrap;
   font-family: 'Segoe UI', sans-serif;
-  margin-top: 1rem;
+  margin-top: 10px;
+  height: 20px;
 }
 
 .countdown-label {
@@ -1071,6 +1072,7 @@ button.next {
   font-size: 1.1rem;
   color: #444;
   height: 12px;
+  margin-top: 45px;
 }
 
 .contador-icono {
