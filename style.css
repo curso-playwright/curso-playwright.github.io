@@ -1074,6 +1074,11 @@ button.next {
   height: 12px;
   margin-top: 55px;
 }
+@media (max-width: 600px) {
+  .contador-visitas {
+   margin-top: 85px;
+  }
+}
 
 .contador-icono {
   font-size: 1.6rem;
