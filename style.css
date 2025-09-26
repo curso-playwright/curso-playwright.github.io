@@ -315,6 +315,7 @@ footer p{
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem 1rem;
+  
 }
 
 .modulo {
@@ -325,7 +326,7 @@ footer p{
 }
 
 .modulo-titulo {
-  background-color: #f0f8ff;
+  background-color: #ffcc80;
   border: none;
   width: 100%;
   text-align: left;
