@@ -1084,6 +1084,11 @@ button.next {
   font-size: 1.6rem;
   color: #ff6f00;
 }
+@media (max-width: 600px) {
+  .contador-icono {
+   margin-top: -20px;
+  }
+}
 
 #contador-numero {
   font-weight: bold;
