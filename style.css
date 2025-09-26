@@ -315,7 +315,6 @@ footer p{
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem 1rem;
-  
 }
 
 .modulo {
@@ -323,6 +322,7 @@ footer p{
   border-radius: 8px;
   margin-bottom: 1rem;
   overflow: hidden;
+  
 }
 
 .modulo-titulo {
