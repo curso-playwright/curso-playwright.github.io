@@ -622,8 +622,8 @@ footer p{
 .oferta-video img {
   width: 100%;
   max-width: 300px;
-  height: auto;
   border-radius: 8px;
+  height: 280px;
 }
 
 .oferta-detalles {
