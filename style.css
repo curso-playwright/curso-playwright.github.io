@@ -53,13 +53,15 @@
   font-size: 1.2rem;
   line-height: 1;
 }
+
+/* Ajuste general */
 .video-container {
   margin: 0 auto;
   aspect-ratio: 16 / 9;
   background: #000;
   border-radius: 12px;
   width: 100%;
-  max-width: 800px; /* límite en pantallas grandes */
+  max-width: 800px;
 }
 
 .video-container iframe {
@@ -68,14 +70,15 @@
   border: 0;
 }
 
-/* En móviles, ocupar todo el ancho */
+/* En móviles, que sea un poco más alto */
 @media (max-width: 768px) {
   .video-container {
     max-width: 100%;
-    border-radius: 0; /* opcional: quitar bordes redondeados en móvil */
+    border-radius: 0;
+    aspect-ratio: 9 / 16;   /* 🔹 cambia la proporción, lo hace más alto */
+    min-height: 300px;      /* 🔹 asegura que no quede muy pequeño */
   }
 }
-
 
 .unit {
   font-size: 0.65rem;
