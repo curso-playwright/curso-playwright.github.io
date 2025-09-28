@@ -57,9 +57,9 @@
 .video-container {
   position: relative;
   width: 100%;
-  max-width: 900px;   /* límite en desktop */
+  max-width: 900px;   /* en desktop no será más grande */
   margin: 0 auto;
-  aspect-ratio: 16 / 9; /* mantiene proporción */
+  overflow: hidden;
 }
 
 .video-container iframe {
@@ -71,11 +71,17 @@
   border: none;
 }
 
-/* Ajuste en móviles: un poco más alto */
+/* Desktop: proporción normal 16:9 */
+@media (min-width: 769px) {
+  .video-container {
+    height: 500px; /* ajusta a lo que te guste */
+  }
+}
+
+/* Mobile: que ocupe más alto */
 @media (max-width: 768px) {
   .video-container {
-    aspect-ratio: 9 / 16; /* más vertical en móviles */
-    max-height: 80vh;     /* usa hasta el 80% de la pantalla */
+    height: 75vh; /* 75% del alto visible en móvil */
   }
 }
 
