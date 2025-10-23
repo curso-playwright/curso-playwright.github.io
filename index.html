@@ -32,22 +32,75 @@
     }
   });
   </script>
-  <!-- Meta Pixel Code -->
+<!-- Meta Pixel Base Code -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '4302015650018074');
-fbq('track', 'PageView');
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '4302015650018074');
+  fbq('track', 'PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=4302015650018074&ev=PageView&noscript=1"
-/></noscript>
+
+<!-- ViewContent: cuando alguien ve la página del curso -->
+<script>
+  fbq('track', 'ViewContent', {
+    content_name: 'Curso de Playwright y TypeScript con Cucumber – Automatización Web desde cero',
+    content_category: 'Educación / Automatización QA',
+    value: 182.00,
+    currency: 'PEN'
+  });
+</script>
+
+<!-- AddToCart: cuando alguien hace clic en el botón “Comprar ahora” (o “Inscríbete”) -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.boton-comprar').forEach(boton => {
+      boton.addEventListener('click', function() {
+        fbq('track', 'AddToCart', {
+          content_name: 'Curso de Playwright y TypeScript con Cucumber – Automatización Web desde cero',
+          value: 182.00,
+          currency: 'PEN'
+        });
+      });
+    });
+  });
+</script>
+
+<!-- InitiateCheckout: cuando el usuario inicia el proceso de pago -->
+<script>
+  fbq('track', 'InitiateCheckout', {
+    content_name: 'Curso de Playwright y TypeScript con Cucumber – Automatización Web desde cero',
+    value: 182.00,
+    currency: 'PEN'
+  });
+</script>
+
+<!-- AddPaymentInfo: cuando el usuario ingresa sus datos de pago -->
+<script>
+  fbq('track', 'AddPaymentInfo', {
+    content_name: 'Curso de Playwright y TypeScript con Cucumber – Automatización Web desde cero',
+    value: 182.00,
+    currency: 'PEN'
+  });
+</script>
+
+<!-- Purchase: cuando se completa la compra -->
+<script>
+  fbq('track', 'Purchase', {
+    content_name: 'Curso de Playwright y TypeScript con Cucumber – Automatización Web desde cero',
+    value: 182.00,
+    currency: 'PEN'
+  });
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=4302015650018074&ev=PageView&noscript=1"/>
+</noscript>
 <!-- End Meta Pixel Code -->
 </head>
 <body>
@@ -650,8 +703,8 @@ document.getElementById("closeModal").addEventListener("click", function() {
       <p class="precio-actual">S/ 182.00 <span class="precio-original">~S/ 910.00~</span></p>
       <p class="descuento">💥 80% de descuento</p>
       <p class="urgencia">⏳ ¡Esta oferta termina en <strong>2 horas</strong>!</p>
-      <div class="botones-oferta">
-        <a href="https://pay.hotmart.com/Y102328378V" class="btn-comprar">Inscríbete al curso online ahora</a>
+      <div class="boton-wrapper">
+        <a href="https://pay.hotmart.com/Y102328378V" class="boton-comprar" style="flex: 1 1 150px;">Inscríbete al curso online ahora</a>
       </div>
       <p class="urgencia" style="color: black;">Garantía de <strong>7 días</strong>!</p>
 
