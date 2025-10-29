@@ -16,8 +16,8 @@
   
    .countdown-wrapper , section.contador-visitas{
      background: linear-gradient(90deg, rgba(106, 27, 154, 0.8), rgba(142, 36, 170, 0.6));
-
    } 
+   
 .countdown-wrapper {
   display: flex;
   align-items: center;
