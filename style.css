@@ -76,6 +76,14 @@
     border-radius: 0; /* opcional: quitar bordes redondeados en móvil */
   }
 }
+
+@media (max-width: 600px) {
+  .countdown-wrapper {
+    padding: 18px 20px; /* más alto verticalmente */
+    font-size: 18px;     /* opcional: texto más grande */
+  }
+}
+
 .unit {
   font-size: 0.65rem;
   margin-top: 2px;
