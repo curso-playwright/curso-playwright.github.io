@@ -403,22 +403,29 @@ footer p{
   text-align: justify;
 }
 
-.modulo-lecciones {
-  display: none;
-  list-style: none;
-  padding: 0.5rem 1.5rem 1rem;
-  margin: 0;
-}
-
 .modulo-lecciones li {
+  display: flex;
+  align-items: flex-start;
   padding: 0.4rem 0;
   font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #555;
+  color: #000;
   border-bottom: 1px solid #eee;
+  flex-wrap: nowrap;
 }
+
+.modulo-lecciones li span {
+  flex-shrink: 0;
+  width: 1.2rem;
+  text-align: center;
+  margin-right: 0.5rem;
+}
+
+/* Este selector aplica al texto plano que sigue al <span> */
+.modulo-lecciones li {
+  text-align: left;
+   color: #000;
+}
+
 
 .modulo-lecciones a {
   margin-left: auto;
@@ -1142,8 +1149,3 @@ button.next {
   font-weight: bold;
   color: orange;
 }
-
-
-
-
-
