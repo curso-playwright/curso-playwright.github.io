@@ -403,6 +403,13 @@ footer p{
   text-align: justify;
 }
 
+.modulo-lecciones {
+  display: none; /* Oculta la lista al inicio */
+  list-style: none;
+  padding: 0.5rem 1.5rem 1rem;
+  margin: 0;
+}
+
 .modulo-lecciones li {
   display: flex;
   align-items: flex-start;
@@ -473,7 +480,7 @@ footer p{
 }
 
 .toggle-symbol {
-  font-size: 1.2rem;
+  font-size: 2.2rem;
   color: #ff6b00;
   margin-left: 1rem;
 }
