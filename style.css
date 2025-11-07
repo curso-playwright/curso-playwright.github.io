@@ -68,9 +68,9 @@
   }
 
   a.btn-cesta {
-  background-color: #6a00ff;
-  color: white;
-  font-size: 14px;
+  background-color: rgb(250 204 21);
+  color: black;
+  font-size: 16px;
   font-weight: bold;
   padding: 10px 10px;
   border-radius: 8px;
@@ -87,7 +87,7 @@
   justify-content: center;
 }
   .btn-cesta:hover {
-    background-color: #4e00c2;
+    background-color: rgb(250 204 21);
   }
 }
 
