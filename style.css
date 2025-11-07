@@ -289,13 +289,13 @@
 }
 
 .faq {
-  max-width: 700px;
+  margin-top: 20px;
   margin: 0 auto;
   text-align: left;
 }
 
 .faq-item {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 3px solid #ccc;
   margin-bottom: 1rem;
 }
 
@@ -305,6 +305,7 @@
   justify-content: space-between;
   cursor: pointer;
   padding: 0.8rem;
+  height: 50px;
   font-weight: bold;
   background: #f9f9f9;
   transition: background 0.3s ease;
@@ -647,7 +648,8 @@ footer p{
   font-weight: bold;
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  font-size: 0.95rem;
+  width: 420px;
+  font-size: 1.3rem;
   flex: 0 0 auto;
 }
 
@@ -700,7 +702,7 @@ footer p{
   padding: 0.8rem 1.6rem;
   background-color:#6a1b9a ;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.2rem;
   text-align: center;
   text-decoration: none;
   border-radius: 6px;
@@ -1041,7 +1043,7 @@ footer p{
 .docente-lista li {
   margin-bottom: 0.8rem;
   font-size: 1rem;
-  display: flex;
+
   align-items: flex-start;
   margin-top: -10px;
   text-align: justify;
@@ -1126,6 +1128,31 @@ button.prev {
 button.next {
   right: 10px;
 }
+#contador {
+  text-align: center;
+  margin: 20px 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+#contador p {
+  font-size: 1rem;
+  color: #ff4b2b;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+#tiempo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff4b2b;
+  background: #fff3f0;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 75, 43, 0.2);
+  letter-spacing: 2px;
+}
+
 
 @media (max-width: 600px) {
   .slide p {
