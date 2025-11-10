@@ -21,7 +21,7 @@
   gap: 1rem;
   flex-wrap: wrap;
   font-family: 'Segoe UI', sans-serif;
-  margin-top: 10px;
+ 
 }
 
 /* Ocultar en escritorio */
@@ -94,12 +94,14 @@
   font-size: 1rem;
   font-weight: 600;
   margin: 0;
+  margin-top: 4px;
   color: #333;
 }
 
 .countdown-boxes {
   display: flex;
   gap: 0.4rem;
+  margin-top: -1px;
 }
 
 .box {
@@ -112,21 +114,24 @@
   align-items: center;
   color: white;
   font-weight: bold;
+  margin-top: 4px;
 }
 
 @media (max-width: 700px) {
   .countdown-wrapper{
     height: 15px !important;
+    flex-direction: column;
   }
 
   .box {
-   margin-top: -15px;
    width: 40px;
    height: 45px;
+   margin-top: 6px;
   }
   
   .countdown-label{
-    margin-top: -15px;
+    margin-top: 6px;
+    font-size: 18px;
   }
 }
 
@@ -158,10 +163,22 @@
   }
 }
 
+@media (max-width: 900px) {
+  .countdown-boxes {
+    margin-top: -3px;
+  }
+  .countdown-label{
+    margin-top: -4px;
+
+  }
+}
+
 @media (max-width: 600px) {
   .countdown-wrapper {
     padding: 18px 20px; /* más alto verticalmente */
     font-size: 18px;     /* opcional: texto más grande */
+    flex-direction: column;
+    margin-top: 6px;
   }
 }
 
