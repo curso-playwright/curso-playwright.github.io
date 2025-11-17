@@ -170,6 +170,9 @@
   .countdown-label{
     margin-top: -4px;
   }
+  .hero-section{
+    margin-top: -50px;
+  }
 }
 
 @media (max-width: 600px) {
