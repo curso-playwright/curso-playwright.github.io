@@ -140,6 +140,10 @@
   .comunidad{
     font-size: 18px !important;
   }
+
+  .hero-video{
+    margin-top: -35px !important;
+  }
 }
 
 .time {
