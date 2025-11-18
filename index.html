@@ -101,36 +101,29 @@
 </head>
 <body>
   <!--POP UPS-->
-<div id="popup" class="popup">
+<div id="popup" class="popup" style="display: flex;">
   <div class="popup-content">
     <!-- Botón de cierre -->
-    <span class="close-btn" onclick="closePopup()">&times;</span>
-    <!-- Imagen -->
-    <img src="img/popups.webp" alt="playwright" class="popup-img">
+    <span class="close-btn" id="cerrarPopup">&times;</span>
+    <!-- Imagen optimizada -->
+    <img src="img/popups.webp" alt="Curso Playwright" class="popup-img" loading="eager" />
     <!-- Botón de acción -->
     <a href="https://pay.hotmart.com/Y102328378V?off=vgwaagsk" class="popup-btn">¡Inscríbete ahora!</a>
   </div>
 </div>
-<script>
-  var mensaje = "Hola, bienvenido al curso de Playwright. Aprovecha la oferta especial.";
-  window.onload = function() {
-    document.getElementById("popup").style.display = "block";
-    reproducirMensaje(mensaje);
-  };
 
-  function closePopup() {
+<script>
+  // Mostrar popup inmediatamente
+  document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    document.getElementById("popup").style.display = "flex";
+  }, 2000); // espera 2 segundos antes de mostrar el popup
+
+  document.getElementById("cerrarPopup").addEventListener("click", function() {
     document.getElementById("popup").style.display = "none";
-    window.speechSynthesis.cancel();
-  }
-  function reproducirMensaje(texto) {
-    if ('speechSynthesis' in window) {
-      var utterance = new SpeechSynthesisUtterance(texto);
-      utterance.lang = "es-ES";
-      utterance.rate = 1;
-      utterance.pitch = 1;
-      window.speechSynthesis.speak(utterance);
-    }
-  }
+  });
+});
+
 </script>
   <!-- FIN POP UPS-->
   <!--NUEVO REALIZAR COMPRA-->
