@@ -63,8 +63,8 @@
   fbq('track', 'ViewContent', {
     content_name: 'Curso de Playwright y TypeScript con Cucumber – Automatización Web desde cero',
     content_category: 'Educación / Automatización QA',
-    value: 182.00,
-    currency: 'PEN'
+    value: 53,
+    currency: 'EUR'
   });
 </script>
 
@@ -75,8 +75,8 @@
       boton.addEventListener('click', function() {
         fbq('track', 'AddToCart', {
           content_name: 'Curso de Playwright y TypeScript con Cucumber – Automatización Web desde cero',
-          value: 182.00,
-          currency: 'PEN'
+          value: 53,
+          currency: 'EUR'
         });
       });
     });
@@ -99,6 +99,39 @@
 <!--FIN MAPA DE CALOR-->
 </head>
 <body>
+  <!--POP UPS-->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <!-- Botón de cierre -->
+    <span class="close-btn" onclick="closePopup()">&times;</span>
+    <!-- Imagen -->
+    <img src="img/popup.png" alt="playwright" class="popup-img">
+    <!-- Botón de acción -->
+    <a href="https://pay.hotmart.com/Y102328378V?off=vgwaagsk" class="popup-btn">¡Inscríbete ahora!</a>
+  </div>
+</div>
+<script>
+  var mensaje = "Hola, bienvenido al curso de Playwright. Aprovecha la oferta especial.";
+  window.onload = function() {
+    document.getElementById("popup").style.display = "block";
+    reproducirMensaje(mensaje);
+  };
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+    window.speechSynthesis.cancel();
+  }
+  function reproducirMensaje(texto) {
+    if ('speechSynthesis' in window) {
+      var utterance = new SpeechSynthesisUtterance(texto);
+      utterance.lang = "es-ES";
+      utterance.rate = 1;
+      utterance.pitch = 1;
+      window.speechSynthesis.speak(utterance);
+    }
+  }
+</script>
+  <!-- FIN POP UPS-->
   <!--NUEVO REALIZAR COMPRA-->
 <div class="barra-precio-fija">
   <div class="bloque-precios">
@@ -109,7 +142,7 @@
 </div>
 <!--FIN-->
 <div class="countdown-wrapper" style="height: 61px; margin-top: -2px; background: linear-gradient(90deg, rgba(106, 27, 154, 0.8), rgba(142, 36, 170, 0.6));">
-  <p class="countdown-label" style="line-height: 1.3; font-size: 14px;font-weight: bold; color: white;">¡ÚLTIMAS VACANTES!</p>
+  <p class="countdown-label" style="line-height: 1.3; font-size: 14px;font-weight: bold; color: white;">¡ÚLTIMAS PLAZAS!</p>
   <div class="countdown-boxes">
     <div class="box red">
       <div class="time" id="days">0</div>
@@ -292,7 +325,6 @@
           <img src="img/mastercad.webp" alt="Mastercard">
           <img src="img/paypal.png" alt="PayPal">
           <img src="img/gpay.jpg" alt="gpay">
-          <img src="img/yape.png" alt="Yape">
           <img src="img/pagoefectivo.webp" alt="Pago Efectivo">
           <img src="img/mercadopago.webp" alt="Pago Efectivo">
         </div>
@@ -897,8 +929,6 @@ document.getElementById("closeModal").addEventListener("click", function() {
   document.getElementById("modalVideo").src = "";
 });
 </script>
-
-
 <script>
   const track = document.querySelector('.slider-track');
   const slides = document.querySelectorAll('.slide');
@@ -921,7 +951,7 @@ document.getElementById("closeModal").addEventListener("click", function() {
   });
 </script>
 
-<div id="proof-message">🛒 Carlos Vásquez acaba de comprar Curso</div>
+<div id="proof-message">🛒</div>
 <script>
   const Clientes = [
     "Carlos Vásquez", "María López", "Joselyn Díaz", "Luis Fernández",
@@ -947,7 +977,7 @@ document.getElementById("closeModal").addEventListener("click", function() {
 ];
 
   const productos = [
-    { nombre: "El CURSO", icono: "📘" },
+    { nombre: "El CURSO"},
   
   ];
 
