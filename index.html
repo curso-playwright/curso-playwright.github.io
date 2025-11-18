@@ -111,19 +111,20 @@
     <a href="https://pay.hotmart.com/Y102328378V?off=vgwaagsk" class="popup-btn">¡Inscríbete ahora!</a>
   </div>
 </div>
-
 <script>
-  // Mostrar popup inmediatamente
   document.addEventListener('DOMContentLoaded', function() {
+  let popupCerrado = false; // 👈 variable de control
   setTimeout(function() {
-    document.getElementById("popup").style.display = "flex";
+    if (!popupCerrado) {
+      document.getElementById("popup").style.display = "flex";
+    }
   }, 2000); // espera 2 segundos antes de mostrar el popup
 
   document.getElementById("cerrarPopup").addEventListener("click", function() {
     document.getElementById("popup").style.display = "none";
+    popupCerrado = true; // 👈 evita que se vuelva a mostrar
   });
 });
-
 </script>
   <!-- FIN POP UPS-->
   <!--NUEVO REALIZAR COMPRA-->
