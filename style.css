@@ -292,7 +292,7 @@
 
 @media (max-width: 900px) {
   .countdown-boxes {
-    margin-top: -3px;
+    margin-top: 4px;
   }
   .countdown-label{
     margin-top: -4px;
