@@ -1,27 +1,85 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const targetTime = new Date().getTime() + 2 * 60 * 60 * 1000; // 2 horas desde ahora
-  function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = targetTime - now;
 
+function iniciarCuentaRegresiva() {
+  const STORAGE_KEY = "countdown_target_time";
+  const COUNTDOWN_MS = 2 * 60 * 60 * 1000; // 2 horas
+
+  // Recuperar o crear tiempo objetivo
+  let targetTime = localStorage.getItem(STORAGE_KEY);
+
+  if (!targetTime) {
+    targetTime = Date.now() + COUNTDOWN_MS;
+    localStorage.setItem(STORAGE_KEY, targetTime);
+  } else {
+    targetTime = parseInt(targetTime);
+  }
+
+  function updateCountdown() {
+    const now = Date.now();
+    let distance = targetTime - now;
+
+    // Si se pasó o llegó a cero, reiniciar por otras 2 horas
     if (distance <= 0) {
-      document.querySelector(".countdown-container").innerHTML = "<p>¡La oferta ha terminado!</p>";
-      return;
+      targetTime = Date.now() + COUNTDOWN_MS;
+      localStorage.setItem(STORAGE_KEY, targetTime);
+      distance = targetTime - now;
     }
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
     document.getElementById("days").textContent = days;
     document.getElementById("hours").textContent = hours;
     document.getElementById("minutes").textContent = minutes;
     document.getElementById("seconds").textContent = seconds;
+
     setTimeout(updateCountdown, 1000);
   }
 
   updateCountdown();
-});
+}
+document.addEventListener("DOMContentLoaded", iniciarCuentaRegresiva);
+
+
+
+function iniciarCuentaRegresivaPrecioCurso() {
+  const STORAGE_KEY = "countdown_target_time";
+  const COUNTDOWN_MS = 2 * 60 * 60 * 1000; // 2 horas
+
+  // Recuperar o crear tiempo objetivo
+  let targetTime = localStorage.getItem(STORAGE_KEY);
+
+  if (!targetTime) {
+    targetTime = Date.now() + COUNTDOWN_MS;
+    localStorage.setItem(STORAGE_KEY, targetTime);
+  } else {
+    targetTime = parseInt(targetTime);
+  }
+
+  function updateCountdown() {
+    const now = Date.now();
+    let distance = targetTime - now;
+
+    // Si se pasó o llegó a cero, reiniciar por otras 2 horas
+    if (distance <= 0) {
+      targetTime = Date.now() + COUNTDOWN_MS;
+      localStorage.setItem(STORAGE_KEY, targetTime);
+      distance = targetTime - now;
+    }
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("hoursRegre").textContent = hours;
+    document.getElementById("minutesRegre").textContent = minutes;
+    document.getElementById("secondsRegre").textContent = seconds;
+
+    setTimeout(updateCountdown, 1000);
+  }
+  updateCountdown();
+}
+document.addEventListener("DOMContentLoaded", iniciarCuentaRegresivaPrecioCurso);
 
   document.querySelectorAll(".faq-question").forEach(button => {
   button.addEventListener("click", () => {
