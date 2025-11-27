@@ -9,7 +9,6 @@
   <meta name="keywords" content="curso automatización web, playwright, typescript, cucumber, testing web, pruebas E2E, QA automation, curso QA, BDD, testing moderno, pruebas automatizadas, framework testing, curso online QA, curso testing profesional">
   <meta name="author" content="Playwright Academy" />
   <link rel="canonical" href="https://curso-playwright.github.io/" />
-  <link rel="preload" as="image" href="img/popups.webp">
   <meta property="og:title" content="Curso Pro de Automatización Web con Playwright" />
   <meta property="og:description" content="Aprende a crear pruebas modernas y escalables con Playwright, TypeScript y Cucumber. Curso online intensivo con certificado." />
   <meta property="og:image" content="https://curso-playwright.github.io/" />
@@ -101,32 +100,75 @@
 </head>
 <body>
 
-  <!----
-<div id="popup" class="popup" style="display: flex;">
+<div id="popup" class="popup" style="display: none;">
   <div class="popup-content">
    
     <span class="close-btn" id="cerrarPopup">&times;</span>
    
     <img src="img/popups.webp" alt="Curso Playwright" class="popup-img" loading="eager" />
    
-    <a href="https://pay.hotmart.com/Y102328378V?off=vgwaagsk" class="popup-btn">¡Inscríbete ahora!</a>
+    <a href="https://pay.hotmart.com/Y102328378V?off=vgwaagsk" class="popup-btn">¡Sí, quiero el descuento!</a>
   </div>
 </div>
--->
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-  let popupCerrado = false; // 👈 variable de control
-  setTimeout(function() {
-    if (!popupCerrado) {
-      document.getElementById("popup").style.display = "flex";
-    }
-  }, 2000); // espera 2 segundos antes de mostrar el popup
+document.addEventListener('DOMContentLoaded', function() {
+  let popupCerrado = false; 
+  let popupMostrado = false;
+  let lastScrollTop = 0;
+  let maxScroll = 0; // Para detectar si bajó bastante
 
-  document.getElementById("cerrarPopup").addEventListener("click", function() {
-    document.getElementById("popup").style.display = "none";
-    popupCerrado = true; // 👈 evita que se vuelva a mostrar
+  const popup = document.getElementById("popup");
+  const cerrarPopup = document.getElementById("cerrarPopup");
+
+  // -------- EXIT INTENT DESKTOP (mouse sale arriba) --------
+  document.addEventListener("mouseout", function(e) {
+    if (popupMostrado || popupCerrado) return;
+    if (e.clientY < 10) { 
+      mostrarPopup();
+    }
   });
+
+  // -------- EXIT INTENT MOBILE --------
+  document.addEventListener("scroll", function() {
+    if (popupMostrado || popupCerrado) return;
+
+    const scrollActual = window.pageYOffset;
+    const altoPagina = document.body.offsetHeight;
+    const porcentaje = (scrollActual / altoPagina) * 100;
+
+    // Guardar el punto más bajo al que llegó el usuario
+    if (scrollActual > maxScroll) {
+      maxScroll = scrollActual;
+    }
+
+    // 1️⃣ Si vio 40% y hace scroll hacia ARRIBA → popups
+    if (scrollActual < lastScrollTop && porcentaje > 40) {
+      mostrarPopup();
+    }
+
+    // 2️⃣ Si regresó al INICIO (0px) después de bajar bastante → popups
+    if (scrollActual === 0 && maxScroll > 350) {
+      mostrarPopup();
+    }
+
+    lastScrollTop = scrollActual <= 0 ? 0 : scrollActual;
+  });
+
+  // -------- Cerrar popup --------
+  cerrarPopup.addEventListener("click", function() {
+    popup.style.display = "none";
+    popupCerrado = true;
+  });
+
+  // -------- Función para mostrar el popup --------
+  function mostrarPopup() {
+    if (!popupMostrado && !popupCerrado) {
+      popup.style.display = "flex";
+      popupMostrado = true;
+    }
+  }
 });
+
 </script>
   <!-- FIN POP UPS-->
   <!--NUEVO REALIZAR COMPRA-->
