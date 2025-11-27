@@ -111,62 +111,33 @@
   </div>
 </div>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // ---------- CONFIG ----------
-  const GRACE_PERIOD_MS = 3000;     // no disparar triggers en los primeros 3s
-  const IDLE_MS = 5000;             // idle intent 5s
-  const TIMEOUT_MS = 12000;         // timeout inteligente 12s
-  const MIN_PERCENT_FOR_TIMEOUT = 30;// para timeout inteligente
-  const MIN_PERCENT_FOR_EXIT = 40;  // para scroll-up exit
-  const MIN_PERCENT_FOR_RETURN = 25;// para volver al inicio
+  const GRACE_PERIOD_MS = 3000; // no disparar triggers en los primeros 3s
+  const IDLE_MS = 5000; // idle intent solo después de interacción real
+  const TIMEOUT_MS = 12000; // timeout inteligente
+  const MIN_PERCENT_FOR_TIMEOUT = 30;
+  const MIN_PERCENT_FOR_EXIT = 40;
+  const MIN_PERCENT_FOR_RETURN = 25;
+  const MIN_SCROLL_FOR_INTERACTION = 25; // px de scroll mínimo para considerar "actividad"
 
   // ---------- ESTADO ----------
-  let popupCerrado = false;
   let popupMostrado = false;
-  let enabledAt = Date.now() + GRACE_PERIOD_MS;
-
+  let popupCerrado = false;
   let lastScrollTop = 0;
   let lastScrollTime = Date.now();
   let maxScroll = 0;
-
   let idleTimer = null;
+  let enabledAt = Date.now() + GRACE_PERIOD_MS;
   let hasInteracted = false;
 
   const popup = document.getElementById("popup");
   const cerrarPopup = document.getElementById("cerrarPopup");
 
-  // Si por CSS/inline ya está visible, no forzamos nada
-  const computed = window.getComputedStyle(popup);
-  if (computed && computed.display !== 'none') {
-    popupMostrado = true;
-  }
-
+  // ---------- UTILS ----------
   function now() { return Date.now(); }
   function isEnabled() { return now() >= enabledAt; }
 
-  // ---------- Mostrar popup (guardas) ----------
-  function mostrarPopup() {
-    if (!isEnabled()) return;                 // no antes del grace period
-    if (popupMostrado || popupCerrado) return;
-    // ultima comprobación: si el DOM ya lo muestra
-    const cs = window.getComputedStyle(popup);
-    if (cs && cs.display !== 'none') {
-      popupMostrado = true;
-      return;
-    }
-    popup.style.display = "flex";
-    popupMostrado = true;
-  }
-
-  // ---------- Cerrar popup ----------
-  if (cerrarPopup) {
-    cerrarPopup.addEventListener("click", function() {
-      popup.style.display = "none";
-      popupCerrado = true;
-    });
-  }
-
-  // ---------- Helpers de scroll/porcentaje ----------
   function getScrollInfo() {
     const scrollActual = window.pageYOffset || document.documentElement.scrollTop || 0;
     const totalScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
@@ -174,102 +145,138 @@ document.addEventListener('DOMContentLoaded', function() {
     return { scrollActual, totalScroll, porcentaje };
   }
 
-  // ---------- Reset/arranque idle (solo después de primera interacción) ----------
+  function log(...args) {
+    console.log("[POPUP DEBUG]", ...args);
+  }
+
+  // ---------- MOSTRAR POPUP ----------
+  function mostrarPopup(causa = "") {
+    if (!isEnabled()) {
+      log("NO mostrar (grace period) por causa:", causa);
+      return;
+    }
+    if (popupMostrado || popupCerrado) return;
+
+    popup.style.display = "flex";
+    popupMostrado = true;
+    log("POPUP MOSTRADO → causa:", causa);
+  }
+
+  // ---------- CERRAR ----------
+  if (cerrarPopup) {
+    cerrarPopup.addEventListener("click", function () {
+      popup.style.display = "none";
+      popupCerrado = true;
+    });
+  }
+
+  // ---------- IDLE INTENT (solo después de interacción real) ----------
   function resetIdleTimer() {
-    hasInteracted = true;
+    if (!isEnabled()) return;
+    if (!hasInteracted) return;
+
     clearTimeout(idleTimer);
-    if (!popupMostrado && !popupCerrado) {
-      idleTimer = setTimeout(() => {
-        mostrarPopup();
-      }, IDLE_MS);
+    idleTimer = setTimeout(() => {
+      mostrarPopup("idle_timeout");
+    }, IDLE_MS);
+  }
+
+  // Se considera "interacción real" solo si hubo scroll de al menos 25px
+  function registrarInteraccionReal(deltaScroll) {
+    if (hasInteracted) return;
+    if (Math.abs(deltaScroll) > MIN_SCROLL_FOR_INTERACTION) {
+      hasInteracted = true;
+      log("Interacción REAL detectada (scroll)");
+      resetIdleTimer();
     }
   }
 
-  ["scroll", "touchmove", "click"].forEach(evt => {
-    document.addEventListener(evt, resetIdleTimer, { passive: true });
+  ["touchmove", "click"].forEach(evt => {
+    document.addEventListener(evt, () => {
+      hasInteracted = true;
+      resetIdleTimer();
+    }, { passive: true });
   });
 
-  // ---------- Scroll handler consolidado (mobile + desktop) ----------
-  document.addEventListener("scroll", function() {
+  // ---------- SCROLL HANDLER (PC + MÓVIL) ----------
+  document.addEventListener("scroll", function () {
     if (popupMostrado || popupCerrado) return;
-    if (!isEnabled()) return; // evitar triggers inmediatos durante el grace period
 
     const t = now();
     const { scrollActual, totalScroll, porcentaje } = getScrollInfo();
 
-    // guardar máxima profundidad
+    const deltaScroll = scrollActual - lastScrollTop;
+    registrarInteraccionReal(deltaScroll);
+
+    if (!isEnabled()) {
+      lastScrollTop = scrollActual;
+      lastScrollTime = t;
+      return;
+    }
+
+    // Guardar mayor descenso
     if (scrollActual > maxScroll) maxScroll = scrollActual;
 
-    // velocidad (px / ms)
+    // Velocidad de scroll
     const dt = Math.max(1, t - lastScrollTime);
-    const deltaPx = scrollActual - lastScrollTop;
-    const velocidad = Math.abs(deltaPx) / dt; // px/ms
+    const velocidad = Math.abs(deltaScroll) / dt;
 
-    // 1) SCROLL-UP RÁPIDO (umbral razonable)
+    // ---- Triggers ----
+
+    // Scroll-up rápido
     if (scrollActual < lastScrollTop && velocidad > 0.6) {
-      mostrarPopup();
+      mostrarPopup("scroll_up_rapido");
     }
 
-    // 2) SCROLL-UP desde > MIN_PERCENT_FOR_EXIT
+    // Scroll-up desde >40%
     if (scrollActual < lastScrollTop && porcentaje > MIN_PERCENT_FOR_EXIT) {
-      mostrarPopup();
+      mostrarPopup("scroll_up_exit");
     }
 
-    // 3) Regresó al inicio después de bajar suficiente (porcentaje)
-    if (scrollActual === 0 && ( (maxScroll / Math.max(totalScroll,1)) * 100 ) > MIN_PERCENT_FOR_RETURN) {
-      mostrarPopup();
+    // Volver al inicio después de bajar suficiente
+    if (scrollActual === 0 && ((maxScroll / totalScroll) * 100) > MIN_PERCENT_FOR_RETURN) {
+      mostrarPopup("return_top");
     }
 
     lastScrollTop = scrollActual <= 0 ? 0 : scrollActual;
     lastScrollTime = t;
+
+    resetIdleTimer();
   }, { passive: true });
 
-  // ---------- Timeout inteligente (12s) ----------
+  // ---------- TIMEOUT INTELIGENTE ----------
   setTimeout(() => {
     if (popupMostrado || popupCerrado) return;
     if (!isEnabled()) return;
 
     const { porcentaje } = getScrollInfo();
     if (porcentaje > MIN_PERCENT_FOR_TIMEOUT) {
-      mostrarPopup();
+      mostrarPopup("timeout_inteligente");
     }
   }, TIMEOUT_MS);
 
-  // ---------- Touchstart top detection (barra superior) ----------
-  document.addEventListener("touchstart", function(e) {
-    if (popupMostrado || popupCerrado) return;
+  // ---------- TOCAR BARRA SUPERIOR (móvil) ----------
+  document.addEventListener("touchstart", function (e) {
     if (!isEnabled()) return;
-    // solo si ya interactuó antes o ya pasó el GRACE
-    if (!hasInteracted && !isEnabled()) return;
-    const touch = e.touches && e.touches[0];
-    if (touch && touch.clientY !== undefined && touch.clientY < 6) {
-      mostrarPopup();
+    if (popupMostrado || popupCerrado) return;
+
+    const t = e.touches[0];
+    if (t.clientY < 6) {
+      mostrarPopup("top_touch");
     }
   });
 
-  // ---------- Mouseout Desktop (exit intent clásico) ----------
-  document.addEventListener("mouseout", function(e) {
-    if (popupMostrado || popupCerrado) return;
+  // ---------- EXIT INTENT PC ----------
+  document.addEventListener("mouseout", function (e) {
     if (!isEnabled()) return;
-    if (e.clientY !== undefined && e.clientY < 10) {
-      mostrarPopup();
+    if (popupMostrado || popupCerrado) return;
+    if (e.clientY < 10) {
+      mostrarPopup("exit_intent_pc");
     }
   });
-
-  // Inicializa idle timer solo después de la primera exposición corta
-  // (No lanzar inmediatamente para evitar mostrar el popup al cargar)
-  setTimeout(() => {
-    // si ya hubo interacción, resetIdleTimer ya habrá configurado el timer
-    if (!hasInteracted) {
-      // si no interactuó en el GRACE_PERIOD, inicializamos el idle timer ahora
-      resetIdleTimer();
-    }
-  }, GRACE_PERIOD_MS + 100);
 
 });
 </script>
-
-
   <!-- FIN POP UPS-->
   <!--NUEVO REALIZAR COMPRA-->
 <div class="barra-precio-fija">
