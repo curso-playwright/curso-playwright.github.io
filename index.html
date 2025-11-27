@@ -114,13 +114,22 @@
 document.addEventListener('DOMContentLoaded', function() {
   let popupCerrado = false; 
   let popupMostrado = false;
+
   let lastScrollTop = 0;
   let maxScroll = 0;
 
   const popup = document.getElementById("popup");
   const cerrarPopup = document.getElementById("cerrarPopup");
 
-  // -------- EXIT INTENT DESKTOP --------
+  // ----------- FUNCIÓN GLOBAL PARA MOSTRAR POPUP -----------
+  function mostrarPopup() {
+    if (!popupMostrado && !popupCerrado) {
+      popup.style.display = "flex";
+      popupMostrado = true;
+    }
+  }
+
+  // ----------- EXIT INTENT DESKTOP (MOUSE HACIA ARRIBA) -----------
   document.addEventListener("mouseout", function(e) {
     if (popupMostrado || popupCerrado) return;
     if (e.clientY < 10) {
@@ -128,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // -------- MOBILE EXIT INTENT --------
+  // ----------- MOBILE EXIT INTENT (BASE) -----------
   document.addEventListener("scroll", function() {
     if (popupMostrado || popupCerrado) return;
 
@@ -136,17 +145,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
     const porcentaje = (scrollActual / totalScroll) * 100;
 
-    // Guardar la profundidad máxima
     if (scrollActual > maxScroll) {
       maxScroll = scrollActual;
     }
 
-    // 1️⃣ Si vio 40% REAL y hace scroll hacia arriba → popup
+    // 1️⃣ Si vio 40% y sube → popup
     if (scrollActual < lastScrollTop && porcentaje > 40) {
       mostrarPopup();
     }
 
-    // 2️⃣ Si regresó al inicio después de bajar mínimo 25% → popup
+    // 2️⃣ Si vuelve al inicio después de bajar 25% → popup
     if (scrollActual === 0 && (maxScroll / totalScroll) * 100 > 25) {
       mostrarPopup();
     }
@@ -154,18 +162,82 @@ document.addEventListener('DOMContentLoaded', function() {
     lastScrollTop = scrollActual <= 0 ? 0 : scrollActual;
   });
 
-  // -------- Cerrar popup --------
+  // ============================================================
+  //                ⭐ TRIGGERS PROFESIONALES ⭐
+  // ============================================================
+
+  // ------------------------------------------------------------
+  // 3️⃣ SCROLL-UP RÁPIDO (muy típico de intención de salida)
+  // ------------------------------------------------------------
+  let ultimoTiempoScroll = Date.now();
+
+  document.addEventListener("scroll", function() {
+    if (popupMostrado || popupCerrado) return;
+
+    const ahora = Date.now();
+    const deltaTiempo = ahora - ultimoTiempoScroll;
+
+    const velocidad = Math.abs(window.pageYOffset - lastScrollTop) / deltaTiempo; // px/ms
+
+    // Si la velocidad de subida es muy alta → abandono
+    if (window.pageYOffset < lastScrollTop && velocidad > 0.7) {
+      mostrarPopup();
+    }
+
+    ultimoTiempoScroll = ahora;
+  });
+
+  // ------------------------------------------------------------
+  // 4️⃣ IDLE INTENT (Sin mover pantalla 4–7 segundos)
+  // ------------------------------------------------------------
+  let idleTimer;
+  function resetIdle() {
+    clearTimeout(idleTimer);
+    if (!popupMostrado && !popupCerrado) {
+      idleTimer = setTimeout(() => {
+        mostrarPopup();
+      }, 5000); // 5 segundos sin actividad
+    }
+  }
+
+  ["scroll", "touchmove", "click"].forEach(evt => {
+    document.addEventListener(evt, resetIdle);
+  });
+
+  resetIdle();
+
+  // ------------------------------------------------------------
+  // 5️⃣ TIMEOUT INTELIGENTE (ha leído 30% y pasan 12s)
+  // ------------------------------------------------------------
+  setTimeout(() => {
+    if (!popupMostrado && !popupCerrado) {
+      const scrollActual = window.pageYOffset;
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const porcentaje = (scrollActual / totalScroll) * 100;
+
+      if (porcentaje > 30) {
+        mostrarPopup();
+      }
+    }
+  }, 12000); // 12 segundos
+
+  // ------------------------------------------------------------
+  // 6️⃣ TOCAR LA BARRA SUPERIOR DEL NAVEGADOR (intento de cerrar)
+  // ------------------------------------------------------------
+  document.addEventListener("touchstart", function(e) {
+    if (popupMostrado || popupCerrado) return;
+
+    // Si toca muy arriba (0–5px del top)
+    if (e.touches[0].clientY < 5) {
+      mostrarPopup();
+    }
+  });
+
+  // ----------- Cerrar popup -----------
   cerrarPopup.addEventListener("click", function() {
     popup.style.display = "none";
     popupCerrado = true;
   });
-
-  function mostrarPopup() {
-    if (!popupMostrado && !popupCerrado) {
-      popup.style.display = "flex";
-      popupMostrado = true;
-    }
-  }
 });
 </script>
 
