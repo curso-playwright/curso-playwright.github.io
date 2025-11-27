@@ -115,39 +115,39 @@ document.addEventListener('DOMContentLoaded', function() {
   let popupCerrado = false; 
   let popupMostrado = false;
   let lastScrollTop = 0;
-  let maxScroll = 0; // Para detectar si bajó bastante
+  let maxScroll = 0;
 
   const popup = document.getElementById("popup");
   const cerrarPopup = document.getElementById("cerrarPopup");
 
-  // -------- EXIT INTENT DESKTOP (mouse sale arriba) --------
+  // -------- EXIT INTENT DESKTOP --------
   document.addEventListener("mouseout", function(e) {
     if (popupMostrado || popupCerrado) return;
-    if (e.clientY < 10) { 
+    if (e.clientY < 10) {
       mostrarPopup();
     }
   });
 
-  // -------- EXIT INTENT MOBILE --------
+  // -------- MOBILE EXIT INTENT --------
   document.addEventListener("scroll", function() {
     if (popupMostrado || popupCerrado) return;
 
     const scrollActual = window.pageYOffset;
-    const altoPagina = document.body.offsetHeight;
-    const porcentaje = (scrollActual / altoPagina) * 100;
+    const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const porcentaje = (scrollActual / totalScroll) * 100;
 
-    // Guardar el punto más bajo al que llegó el usuario
+    // Guardar la profundidad máxima
     if (scrollActual > maxScroll) {
       maxScroll = scrollActual;
     }
 
-    // 1️⃣ Si vio 40% y hace scroll hacia ARRIBA → popups
+    // 1️⃣ Si vio 40% REAL y hace scroll hacia arriba → popup
     if (scrollActual < lastScrollTop && porcentaje > 40) {
       mostrarPopup();
     }
 
-    // 2️⃣ Si regresó al INICIO (0px) después de bajar bastante → popups
-    if (scrollActual === 0 && maxScroll > 350) {
+    // 2️⃣ Si regresó al inicio después de bajar mínimo 25% → popup
+    if (scrollActual === 0 && (maxScroll / totalScroll) * 100 > 25) {
       mostrarPopup();
     }
 
@@ -160,7 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
     popupCerrado = true;
   });
 
-  // -------- Función para mostrar el popup --------
   function mostrarPopup() {
     if (!popupMostrado && !popupCerrado) {
       popup.style.display = "flex";
@@ -168,8 +167,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 });
-
 </script>
+
   <!-- FIN POP UPS-->
   <!--NUEVO REALIZAR COMPRA-->
 <div class="barra-precio-fija">
