@@ -111,7 +111,7 @@
   </div>
 </div>
 
-<script>
+<script> 
 document.addEventListener('DOMContentLoaded', function() {
   let popupCerrado = false; 
   let popupMostrado = false;
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const popup = document.getElementById("popup");
   const cerrarPopup = document.getElementById("cerrarPopup");
 
-  // -------- EXIT INTENT DESKTOP --------
+  // ===== EXIT INTENT DESKTOP =====
   document.addEventListener("mouseout", function(e) {
     if (popupMostrado || popupCerrado) return;
     if (e.clientY < 10) {
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // -------- MOBILE EXIT INTENT --------
+  // ===== MOBILE EXIT INTENT =====
   document.addEventListener("scroll", function() {
     if (popupMostrado || popupCerrado) return;
 
@@ -137,25 +137,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
     const porcentaje = (scrollActual / totalScroll) * 100;
 
-    // Guardar la profundidad máxima
+    // Registrar máxima profundidad alcanzada
     if (scrollActual > maxScroll) {
       maxScroll = scrollActual;
     }
 
-    // 1️⃣ Si vio 40% REAL y hace scroll hacia arriba → popup
-    if (scrollActual < lastScrollTop && porcentaje > 40) {
-      mostrarPopup();
-    }
+    // ===== DETALLE 2 =====
+    // Si bajó al menos 25% y comienza a subir → mostrar popup
+    const porcentajeMax = (maxScroll / totalScroll) * 100;
 
-    // 2️⃣ Si regresó al inicio después de bajar mínimo 25% → popup
-    if (scrollActual === 0 && (maxScroll / totalScroll) * 100 > 25) {
+    if (scrollActual < lastScrollTop && porcentajeMax >= 25) {
       mostrarPopup();
     }
 
     lastScrollTop = scrollActual <= 0 ? 0 : scrollActual;
   });
 
-  // -------- Cerrar popup --------
+  // ----- CERRAR POPUP -----
   cerrarPopup.addEventListener("click", function() {
     popup.style.display = "none";
     popupCerrado = true;
@@ -167,8 +165,10 @@ document.addEventListener('DOMContentLoaded', function() {
       popupMostrado = true;
     }
   }
+
 });
 </script>
+
   <!-- FIN POP UPS-->
   <!--NUEVO REALIZAR COMPRA-->
 <div class="barra-precio-fija">
