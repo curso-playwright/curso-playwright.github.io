@@ -110,11 +110,13 @@
     <a href="https://pay.hotmart.com/Y102328378V?off=vgwaagsk" class="popup-btn">¡Sí, quiero el descuento!</a>
   </div>
 </div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   let popupCerrado = false; 
   let popupMostrado = false;
   let lastScrollTop = 0;
+  let maxScroll = 0;
 
   const popup = document.getElementById("popup");
   const cerrarPopup = document.getElementById("cerrarPopup");
@@ -122,12 +124,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // -------- EXIT INTENT DESKTOP --------
   document.addEventListener("mouseout", function(e) {
     if (popupMostrado || popupCerrado) return;
-    if (e.clientY < 10) { 
+    if (e.clientY < 10) {
       mostrarPopup();
     }
   });
 
-  // -------- EXIT INTENT MOBILE (scroll up + 40%) --------
+  // -------- MOBILE EXIT INTENT --------
   document.addEventListener("scroll", function() {
     if (popupMostrado || popupCerrado) return;
 
@@ -135,8 +137,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
     const porcentaje = (scrollActual / totalScroll) * 100;
 
-    // Detecta SCROLL HACIA ARRIBA + al menos 40% recorrido real
+    // Guardar la profundidad máxima
+    if (scrollActual > maxScroll) {
+      maxScroll = scrollActual;
+    }
+
+    // 1️⃣ Si vio 40% REAL y hace scroll hacia arriba → popup
     if (scrollActual < lastScrollTop && porcentaje > 40) {
+      mostrarPopup();
+    }
+
+    // 2️⃣ Si regresó al inicio después de bajar mínimo 25% → popup
+    if (scrollActual === 0 && (maxScroll / totalScroll) * 100 > 25) {
       mostrarPopup();
     }
 
@@ -150,12 +162,13 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   function mostrarPopup() {
-    popup.style.display = "flex";
-    popupMostrado = true;
+    if (!popupMostrado && !popupCerrado) {
+      popup.style.display = "flex";
+      popupMostrado = true;
+    }
   }
 });
 </script>
-
   <!-- FIN POP UPS-->
   <!--NUEVO REALIZAR COMPRA-->
 <div class="barra-precio-fija">
