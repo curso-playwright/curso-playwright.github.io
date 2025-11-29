@@ -171,7 +171,7 @@
   }
 
   .precio-descuento {
-    font-size: 30px;
+    font-size: 21px;
     font-weight: bold;
     color: #6a00ff;
   }
@@ -193,7 +193,7 @@
   transition: background-color 0.3s ease;
   margin-left: auto;
   margin-right: 26px;
-  width: 260px;
+  width: 200px;
   height: 40px;
   text-align: center;
   text-decoration: none;
