@@ -420,7 +420,7 @@
   }
 
   .hero-text h2 {
-    text-align: justify;
+    text-align:center !important;
   }
 
   .hero-text p {
