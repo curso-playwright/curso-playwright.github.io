@@ -413,6 +413,10 @@
 
   .hero-text h1 {
     font-size: 23px !important;
+    line-height: 1.5;
+    margin: 0 auto;
+    letter-spacing: 0.02em;
+    word-spacing: 0.05em;
   }
 
   .hero-text h2 {
@@ -441,7 +445,7 @@
   .hero-text{
     margin-top: 67px;
   }
-  
+
   .btn-cesta{
   width: 210px !important;
   font-size: 18px !important;
