@@ -261,19 +261,17 @@ document.addEventListener('DOMContentLoaded', function() {
     </h2>
    
   </div>
+  
  <!-- Video embebido -->
 <div class="hero-video" style="flex: 1 1 400px; max-width: 860px; margin: 0 auto;">
   <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
- <iframe 
-  src="https://player.vimeo.com/video/1127379593" 
-  frameborder="0" 
-  allow="autoplay; fullscreen" 
-  allowfullscreen 
-  loading="lazy"
-  fetchpriority="low"
-  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-  title="Video de presentación">
-</iframe>
+ <script src="https://fast.wistia.com/player.js" async>
+</script>
+<script src="https://fast.wistia.com/embed/mgdj31kl3r.js" async type="module">
+</script>
+<style>wistia-player[media-id='mgdj31kl3r']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/mgdj31kl3r/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style>
+<wistia-player media-id="mgdj31kl3r" aspect="1.7777777777777777">
+</wistia-player>
   </div>
 </div>
 <script>
