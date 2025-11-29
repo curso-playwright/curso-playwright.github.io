@@ -406,15 +406,89 @@
   }
 }
 
+@media (max-width: 950px) {
+  .hero-text{
+    margin-top: 67px;
+  }
 
-@media (max-width: 600px) {
   .hero-text h1 {
-    font-size: 1.6rem;
+    font-size: 23px !important;
+  }
+
+  .hero-text h2 {
+    text-align: justify;
   }
 
   .hero-text p {
     font-size: 1rem;
   }
+ 
+}
+
+@media (max-width: 1000px) {
+  .hero-text{
+    margin-top: 67px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .hero-text{
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 450px) {
+  .hero-text{
+    margin-top: 67px;
+  }
+  
+  .btn-cesta{
+  width: 210px !important;
+  font-size: 18px !important;
+ }
+}
+
+@media (max-width: 850px) {
+  .hero-text{
+    margin-top: 67px;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-text h1 {
+    font-size: 22px !important;
+  }
+
+  .hero-text h2 {
+    text-align: justify;
+  }
+}
+
+@media (max-width: 380px) {
+.premium-badge{
+  width: 250px !important;
+ }
+
+.countdown-wrapper{
+  width: 100px;
+ }
+
+ .boton-comprar{
+  width: 78% !important;
+ }
+
+ .btn-cesta{
+  width: 180px !important;
+  font-size: 18px !important;
+ }
+
+}
+
+@media (max-width: 350px) {
+ .btn-cesta{
+  width: 150px !important;
+  font-size: 16px !important;
+ }
 }
 
 .whatsapp-btn img {
