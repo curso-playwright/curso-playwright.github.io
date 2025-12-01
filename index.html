@@ -726,7 +726,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="boton-wrapper">
   <a href="https://pay.hotmart.com/Y102328378V?off=vgwaagsk" style="width: 310px;" class="boton-comprar">Inscríbete ahora y recibe todos los bonos 🎁</a>
 </div>
-
 <section style="margin-top: 2px;" class="testimonios">
  <div style="position: relative; margin-bottom: 40px; text-align: center;">
   <h2 class="section-title" style="margin-top: -10px;">
@@ -737,51 +736,38 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="slider-container">
     <div class="slider-track">
       <div class="slide">
-  <img src="img/1.webp" alt="Valentina">
-  <p style="font-size: 18px;"><strong>Valentina</strong> — “Gracias al curso, logré automatizar el flujo de pagos en <em>FintechNova</em>. Ahora soy líder de QA y mi equipo usa Playwright como estándar.”</p>
+  <img src="img/testimonio1.webp" alt="Valentina">
 </div>
 <div class="slide">
-  <img src="img/6.webp" alt="Diego">
-  <p style="font-size: 18px;"><strong>Diego</strong> — “Entré como trainee en <em>DevSpark</em> y terminé liderando el pipeline de CI/CD. Este curso me dio las herramientas que no enseñan en la universidad.”</p>
+  <img src="img/testimonio2.webp" alt="Diego">
 </div>
 <div class="slide">
-  <img src="img/2.webp" alt="Lucía">
-  <p style="font-size: 18px;"><strong>Lucía</strong> — “En <em>RetailFlow</em> necesitábamos automatizar regresiones críticas. Con lo aprendido, reduje el tiempo de testing en un 70% y fui promovida.”</p>
+  <img src="img/testimonio3.webp" alt="Lucía">
 </div>
 <div class="slide">
-  <img src="img/7.webp" alt="Andrés">
-  <p style="font-size: 18px;"><strong>Andrés</strong> — “Nunca había tocado TypeScript. Hoy en <em>LogiTech QA</em> soy quien define los estándares de automatización. Este curso me cambió la carrera.”</p>
+  <img src="img/testimonio4.webp" alt="Andrés">
 </div>
 <div class="slide">
-  <img src="img/3.webp" alt="Melissa">
-  <p style="font-size: 18px;"><strong>Melissa</strong> — “En <em>NeoBank Perú</em> necesitábamos pruebas E2E confiables. Lo que aprendí aquí lo implementé en producción y ahora capacito a otros testers.”</p>
+  <img src="img/testimonio5.webp" alt="Melissa">
 </div>
 <div class="slide">
-  <img src="img/8.webp" alt="Esteban">
-  <p style="font-size: 18px;"><strong>Esteban</strong> — “Pasé de hacer pruebas manuales en <em>DataBridge</em> a automatizar todo el onboarding de usuarios. Este curso me dio visión y herramientas reales.”</p>
+  <img src="img/testimonio6.webp" alt="Esteban">
 </div>
 <div class="slide">
-  <img src="img/4.webp" alt="Sofía">
-  <p style="font-size: 18px;"><strong>Sofía</strong> — “En <em>AgroTech QA</em> necesitábamos validar formularios complejos. Con Playwright y Cucumber, ahora tenemos cobertura total y cero bugs en producción.”</p>
+  <img src="img/testimonio7.webp" alt="Sofía">
 </div>
 <div class="slide">
-  <img src="img/9.webp" alt="Martín">
-  <p style="font-size: 18px;"><strong>Martín</strong> — “Gracias a este curso, en <em>Cloudify</em> migramos todo nuestro testing a Playwright. Me convertí en referente interno y ahora doy charlas en meetups.”</p>
+  <img src="img/testimonio8.webp" alt="Martín">
 </div>
 <div class="slide">
-  <img src="img/5.webp" alt="Paula">
-  <p style="font-size: 18px;"><strong>Paula</strong> — “Estaba estancada en QA manual. Hoy en <em>SmartQA Solutions</em> lidero el área de automatización. Este curso fue el punto de quiebre.”</p>
-</div>
-<div class="slide">
-  <img src="img/10.webp" alt="Renzo">
-  <p style="font-size: 18px;"><strong>Renzo</strong> — “En <em>TechZen</em> necesitábamos integrar pruebas en GitHub Actions. Lo logré en 3 días gracias al mini curso incluido. Brutal experiencia.”</p>
+  <img src="img/testimonio9.webp" alt="Paula">
 </div>
 </div>
 <button class="prev">←</button>
 <button class="next">→</button>
 </div>
 </section>
-<section style="margin-top: 255px;" class="dirigido">
+<section style="margin-top: 355px;" class="dirigido">
  <div style="position: relative; margin-bottom: 40px; text-align: center;">
   <h2 class="section-title" style="margin-top: -10px;">
     <span class="icon">🎯</span> ¿A Quién Va Dirigido?
@@ -962,21 +948,29 @@ document.getElementById("closeModal").addEventListener("click", function() {
   const prevBtn = document.querySelector('.prev');
   const nextBtn = document.querySelector('.next');
   let index = 0;
+  const totalSlides = slides.length;
 
   function updateSlider() {
     track.style.transform = `translateX(-${index * 100}%)`;
   }
 
   prevBtn.addEventListener('click', () => {
-    index = (index > 0) ? index - 1 : slides.length - 1;
+    index = (index > 0) ? index - 1 : totalSlides - 1;
     updateSlider();
   });
 
   nextBtn.addEventListener('click', () => {
-    index = (index < slides.length - 1) ? index + 1 : 0;
+    index = (index < totalSlides - 1) ? index + 1 : 0;
     updateSlider();
   });
+
+  // Cambio automático cada 5 segundos
+  setInterval(() => {
+    index = (index < totalSlides - 1) ? index + 1 : 0;
+    updateSlider();
+  }, 5000);
 </script>
+
 
 <div id="proof-message">🛒</div>
 <script>
