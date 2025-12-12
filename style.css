@@ -1659,3 +1659,36 @@ button.next {
     font-size: 2rem;
     margin-right: 10px;
 }
+
+/* ====== 1. Smartphones pequeños ====== */
+@media (max-width: 480px) {
+    .texto-responsive {
+        text-align: justify;
+        text-justify: auto;
+        hyphens: auto;
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+}
+
+/* ====== 2. Móviles grandes / Phablets ====== */
+@media (min-width: 481px) and (max-width: 768px) {
+    .texto-responsive {
+        text-align: justify;
+        text-justify: auto;
+        hyphens: auto;
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+}
+
+/* ====== 3. Tablets ====== */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .texto-responsive {
+        text-align: justify;
+        text-justify: auto;
+        hyphens: auto;
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+}
