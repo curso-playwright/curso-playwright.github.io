@@ -1692,3 +1692,103 @@ button.next {
         padding: 0 1rem;
     }
 }
+
+/* Subtítulo */
+.hero-subtitulo {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 400;
+  margin: 0 0 12px;
+  color: #E0E0E0;
+  padding: 0 6px;
+}
+
+/* Título principal */
+.hero-titulo {
+  font-size: clamp(20px, 2.8vw, 28px);
+  font-weight: 700;
+  margin: 0 0 16px;
+  line-height: 1.4;
+  color: #fff;
+  padding: 0 6px;
+}
+
+/* Beneficio económico */
+.hero-beneficio {
+  font-size: clamp(18px, 2.5vw, 22px);
+  font-weight: 400;
+  margin: 0 0 12px;
+  color: #E0E0E0;
+  padding: 0 6px;
+}
+
+/* Colores de acento */
+.hero-accent {
+  color: #00E5FF;
+}
+
+.hero-tech {
+  color: #FFD700;
+  font-weight: 700;
+}
+
+/* Ajustes para móviles pequeños */
+@media (max-width: 480px) {
+  .hero-subtitulo {
+    font-size: 22px !important;
+    text-align: justify;
+    line-height: 1.4;
+    color: #E0E0E0;
+    margin-bottom: 12px;
+    text-align: left;
+    margin-top: -50px;
+  }
+
+  .hero-titulo {
+   text-align: left;               /* Evita los espacios feos de justify */
+  font-size: clamp(30px, 2.5vw, 28px) !important; /* Se adapta a PC y mobile */
+  line-height: 1.5;
+  color: #fff;
+  margin-bottom: 16px;
+  word-break: break-word;
+  hyphens: none;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+                 
+  }
+
+  .hero-beneficio {
+   text-align: left !important;
+    font-size: 18px !important;
+    color: #E0E0E0;
+   
+  }
+}
+
+@media (max-width: 479px) {
+   .hero-beneficio {
+   text-align: left !important;
+    font-size: 14px !important;
+    color: #E0E0E0;
+  }
+}
+
+/* Ajustes para móviles medianos (phablets) */
+@media (max-width: 768px) {
+  .hero-texto {
+    text-align: center;
+    padding: 0 24px;
+  }
+
+  .hero-subtitulo {
+    font-size: 24px;
+  }
+
+  .hero-titulo {
+    font-size: 22px;
+  }
+
+  .hero-beneficio {
+    font-size: 18px;
+  }
+}
