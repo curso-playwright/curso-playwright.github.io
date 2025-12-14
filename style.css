@@ -1768,7 +1768,7 @@ button.next {
 @media (max-width: 479px) {
    .hero-beneficio {
    text-align: left !important;
-    font-size: 14px !important;
+    font-size: 20px !important;
     color: #E0E0E0;
   }
 }
